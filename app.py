@@ -6,7 +6,7 @@ items = []
 
 @app.route("/")
 def home():
-    return jsonify({"message": "Hello World"})
+    return jsonify({"message": "Hello World!"})
 
 @app.route("/items", methods=["GET"])
 def get_items():
