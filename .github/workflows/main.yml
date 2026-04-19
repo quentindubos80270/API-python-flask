@@ -1,0 +1,28 @@
+name: lint and test app
+on: [push]
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: setup python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.14"
+      - name: install dependencies
+        run: pip install -r requirements.txt flake8
+      - name: run flake8
+        run: flake8 .
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: setup python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.14"
+      - name: install dependencies
+        run: pip install -r requirements.txt flake8
+      - name: run test
+        run: pytest
+    needs: lint
