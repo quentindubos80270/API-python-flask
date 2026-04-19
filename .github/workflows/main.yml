@@ -31,7 +31,7 @@ jobs:
       - name: Start Flask app
         run: |
           python app.py &
-      
+
       - name: Wait for API
         run: |
           for i in {1..10}; do
@@ -39,9 +39,39 @@ jobs:
               echo "API is ready"
               break
             fi
-            echo "Waiting for API..."
             sleep 2
           done
 
       - name: run tests
         run: pytest
+
+  docker-test:
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Build Docker image
+        run: docker build -t api-iscod:latest .
+
+      - name: run docker container
+        run: docker run -d --name API_ISCOD -p 5000:5000 api-iscod:latest
+
+      - name: Wait for container API
+        run: |
+          for i in {1..10}; do
+            if curl -s http://localhost:5000/; then
+              echo "API ready"
+              exit 0
+            fi
+            sleep 2
+          done
+          exit 1
+
+      - name: check container status
+        run: docker ps --filter name=API_ISCOD
+
+      - name: stop and remove container
+        run: |
+          docker stop API_ISCOD
+          docker rm API_ISCOD
