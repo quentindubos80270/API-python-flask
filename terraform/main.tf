@@ -16,25 +16,20 @@ variable "render_api_key" {
   sensitive = true
 }
 
-resource "render_web_service" "api-python-flask" {
+resource "render_web_service" "flask_api" {
   name   = "api-python-flask"
   region = "frankfurt"
 
-  # Image Docker depuis GHCR
-  image = {
-    url = "ghcr.io/quentindubos80270/api-python-flask/api-iscod:latest"
+  runtime_source = {
+    type = "docker"
+    image = "ghcr.io/quentindubos80270/api-iscod:latest"
   }
 
   plan = "free"
 
-  env_vars = [
-    {
-      key   = "ENV"
-      value = "production"
-    }
-  ]
+  env_vars = {
+    ENV = "production"
+  }
 
   health_check_path = "/health"
-
-  start_command = "python app.py"
 }
