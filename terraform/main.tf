@@ -22,7 +22,7 @@ resource "render_web_service" "flask_api" {
 
   # Image Docker depuis GHCR
   image = {
-    url = "ghcr.io/quentindubos80270/api-python-flask:latest"
+    url = "ghcr.io/quentindubos80270/api-python-flask/api-iscod:latest"
   }
 
   plan = "free"

@@ -24,6 +24,6 @@ jobs:
                 username: ${{ github.actor }}
                 password: ${{ secrets.GITHUB_TOKEN }}
             - name: Build Docker Image
-              run: docker build -t ghcr.io/quentindubos80270/API-python-flask/api-iscod:latest .
+              run: docker build -t ghcr.io/quentindubos80270/api-python-flask/api-iscod:latest .
             - name: Push Docker Image to GHCR
-              run: docker push ghcr.io/quentindubos80270/API-python-flask/api-iscod:latest
+              run: docker push ghcr.io/quentindubos80270/api-python-flask/api-iscod:latest
