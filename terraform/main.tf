@@ -16,7 +16,7 @@ variable "render_api_key" {
   sensitive = true
 }
 
-resource "render_web_service" "flask_api" {
+resource "render_web_service" "api-python-flask" {
   name   = "api-python-flask"
   region = "frankfurt"
 
