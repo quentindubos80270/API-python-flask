@@ -22,14 +22,19 @@ resource "render_web_service" "flask_api" {
 
   runtime_source = {
     type = "docker"
-    image = "ghcr.io/quentindubos80270/api-iscod:latest"
+    image = {
+      url = "ghcr.io/quentindubos80270/api-python-flask/api-iscod:latest"
+    }
   }
 
   plan = "free"
 
-  env_vars = {
-    ENV = "production"
-  }
+  env_vars = [
+    {
+      key   = "ENV"
+      value = "production"
+    }
+  ]
 
   health_check_path = "/health"
 }
