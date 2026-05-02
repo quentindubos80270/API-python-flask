@@ -1,0 +1,4 @@
+name: Docker publish to GHCR
+
+on:
+    workflow_dispatch:
